@@ -28,11 +28,11 @@ class mpeserta extends CI_Model {
         }
     }
     
-    function daftar_peserta_individu(){
+    function daftar_peserta_individu($TAHUN){
         //$nomorgrup = $this->input->post('nomorgrup');
         //echo 'ini '.$nomorgrup;die;
         //if(isset($nomorgrup)){      
-        //$this->db->like('NOMOR_PESERTA', '2016', 'after'); 
+        $this->db->like('NOMOR_PESERTA', $TAHUN, 'after'); 
         $this->db->order_by("NOMOR_PESERTA", "desc"); 
         $baca = $this->db->get_where('PESERTA',array('NOMOR_GRUP'=>NULL,'KODE_STATUS'=>'1'));
         if($baca->num_rows() > 0){
@@ -47,6 +47,23 @@ class mpeserta extends CI_Model {
     
     function detail_peserta($nomorpeserta){
         //$nomorgrup = $this->input->post('nomorgrup');
+        //echo 'ini '.$nomorgrup;die;
+        if(isset($nomorpeserta)){            
+            $baca = $this->db->get_where('PESERTA',array('NOMOR_PESERTA'=>$nomorpeserta));
+            if($baca->num_rows() > 0){
+                foreach ($baca->result() as $data){
+                    $hasil[] = $data;
+                }
+                return $hasil;
+            }
+        }
+    }
+        
+    
+    function get_detail_peserta($nomorpeserta = NULL){
+        if(!isset($nomorpeserta)){
+            $nomorpeserta = $this->input->post('nomor_peserta');
+        }
         //echo 'ini '.$nomorgrup;die;
         if(isset($nomorpeserta)){            
             $baca = $this->db->get_where('PESERTA',array('NOMOR_PESERTA'=>$nomorpeserta));
@@ -200,7 +217,7 @@ class mpeserta extends CI_Model {
                 'USIA_PENSIUN'=>$this->input->post('USIA_PENSIUN'),                                    
                 'JENIS_KELAMIN'=>$this->input->post('JENIS_KELAMIN'),                                    
                 //'TGL_MASUK'=>$this->input->post('TGL_MASUK'),                                                        
-                'TEMPAT_LAHIR'=>'TEMPAT_LAHIR',
+                'TEMPAT_LAHIR'=>$this->input->post('TEMPAT_LAHIR'),
                 //'TGL_LAHIR'=>'TGL_LAHIR',
                 'ALAMAT'=>$this->input->post('ALAMAT'), 
                 'TGL_KERJA'=>$this->input->post('TGL_KERJA'),                
@@ -211,6 +228,48 @@ class mpeserta extends CI_Model {
                 'NO_REKENING'=>$this->input->post('NO_REKENING'),                
                 'NAMA_BANK'=>$this->input->post('NAMA_BANK'),                
                 'PEMILIK_REKENING'=>$this->input->post('PEMILIK_REKENING')
+                );
+        $this->db->where('NOMOR_PESERTA', $this->input->post('NOMOR_PESERTA'));        
+        $this->db->UPDATE('PESERTA',$data); 
+        
+        return $data;
+    }
+    
+    function update_data_peserta(){
+                
+        $data = array(
+                'NOMOR_PESERTA'=>$this->input->post('NOMOR_PESERTA'),                                    
+                'NOMOR_GRUP'=>$this->input->post('NOMOR_GRUP'),                                    
+                'NPWP'=>$this->input->post('NPWP'),                                    
+                'NAMA'=>$this->input->post('NAMA'),                                    
+                'USIA_PENSIUN'=>$this->input->post('USIA_PENSIUN'),                                    
+                'JENIS_KELAMIN'=>$this->input->post('JENIS_KELAMIN'),                                    
+                'TGL_MASUK'=>$this->input->post('TGL_MASUK'),                                                        
+                'TEMPAT_LAHIR'=>$this->input->post('TEMPAT_LAHIR'),
+                'TGL_LAHIR'=>$this->input->post('TGL_LAHIR'),
+                'ALAMAT'=>$this->input->post('ALAMAT'), 
+                'TGL_KERJA'=>$this->input->post('TGL_KERJA'),                
+                'GAJI'=>$this->input->post('GAJI'),                
+                'PHONE'=>$this->input->post('PHONE'),                
+                'EMAIL'=>$this->input->post('EMAIL'),                
+                'JENIS_INVESTASI'=>$this->input->post('JENIS_INVESTASI'),                
+                'HANDPHONE'=>$this->input->post('HANDPHONE'),                
+                'KODE_STATUS'=>$this->input->post('KODE_STATUS'),                
+                'NOMOR_IDENTITAS'=>$this->input->post('NOMOR_IDENTITAS'),                
+                'KODE_POS'=>$this->input->post('KODE_POS'),                
+                'NO_REKENING'=>$this->input->post('NO_REKENING'),                
+                'NAMA_BANK'=>$this->input->post('NAMA_BANK'),                
+                'PEMILIK_REKENING'=>$this->input->post('PEMILIK_REKENING'),
+                'HP_KORESPONDENSI'=>$this->input->post('HP_KORESPONDENSI'),
+                'ALAMAT_KORESPONDENSI'=>$this->input->post('ALAMAT_KORESPONDENSI'),
+                'IDENTITAS_WNA'=>$this->input->post('IDENTITAS_WNA'),
+                'STATUS_PERNIKAHAN'=>$this->input->post('STATUS_PERNIKAHAN'),
+                'TGL_PERNIKAHAN'=>$this->input->post('TGL_PERNIKAHAN'),
+                'NO_AGEN'=>$this->input->post('NO_AGEN'),
+                'NAMA_AGEN'=>$this->input->post('NAMA_AGEN'),
+                'NAMA_PEMBAYAR_IURAN'=>$this->input->post('NAMA_PEMBAYAR_IURAN'),
+                'NO_PENAGIH'=>$this->input->post('NO_PENAGIH'),
+                'METODE_CHANNEL'=>$this->input->post('METODE_CHANNEL'),
                 );
         $this->db->where('NOMOR_PESERTA', $this->input->post('NOMOR_PESERTA'));        
         $this->db->UPDATE('PESERTA',$data); 
@@ -260,6 +319,37 @@ class mpeserta extends CI_Model {
             }
             return $hasil;
         }        
+    }
+    
+    
+    function historis_investasi_peserta($nomorpeserta){
+        //$nomorgrup = $this->input->post('nomorgrup');
+        //echo 'ini '.$nomorgrup;die;
+        if(isset($nomorpeserta)){   
+            $this->db->order_by("TGLUPDATE", "desc"); 
+            $baca = $this->db->get_where('MUTASI_INVESTASI_HISTORY',array('NOMOR_PESERTA'=>$nomorpeserta));
+            if($baca->num_rows() > 0){
+                foreach ($baca->result() as $data){
+                    $hasil[] = $data;
+                }
+                return $hasil;
+            }
+        }
+    }
+    
+    function historis_perubahan_grup($nomorpeserta){
+        //$nomorgrup = $this->input->post('nomorgrup');
+        //echo 'ini '.$nomorgrup;die;
+        if(isset($nomorpeserta)){   
+            $this->db->order_by("TGLUPDATE", "desc"); 
+            $baca = $this->db->get_where('PESERTA_HISTORY',array('NOMOR_PESERTA'=>$nomorpeserta));
+            if($baca->num_rows() > 0){
+                foreach ($baca->result() as $data){
+                    $hasil[] = $data;
+                }
+                return $hasil;
+            }
+        }
     }
 }
 ?>

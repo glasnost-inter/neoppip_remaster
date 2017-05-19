@@ -45,18 +45,18 @@ class PDF extends FPDF{
             $this->Ln();
             $this->Ln();
 			$this->Cell(50,6,'Mengetahui',0,0,'L');			
-			$this->Cell(78,6,'',0,0,'R');
+			$this->Cell(78,6,'Verifikasi',0,0,'C');
 			$this->Cell(50,6,'Dibuat Oleh',0,0,'C');				
 			$this->Ln();
 			$this->Cell(50,6,'Kabag Operasional',0,0,'L');			
-			$this->Cell(78,6,'',0,0,'R');
+			$this->Cell(78,6,'Kabag Akuntansi & Administrasi',0,0,'C');
 			$this->Cell(50,6,'Pegawai Operasional',0,0,'C');			
 			$this->Ln();
 			$this->Ln();
 			$this->Ln();
 			$this->Ln();
 			$this->Cell(50,6,'(Abdul Salam)',0,0,'L');			
-			$this->Cell(78,6,'',0,0,'R');
+			$this->Cell(78,6,'(Yunita Hasanah)',0,0,'C');
 			$this->Cell(50,6,'(Kartika Chandra Buana)',0,0,'C');
     }
     

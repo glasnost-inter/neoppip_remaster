@@ -28,6 +28,8 @@
 							</ul>
 						</li>   
                         <li><a href="<?php echo base_url('index.php/cgrup') ?>">Pendaftaran Grup</a></li>
+                        <li><a href="<?php echo base_url('index.php/cpeserta/data_individu') ?>">Data Peserta</a></li>
+                        <li><a href="<?php echo base_url('index.php/cgrup/data_grup') ?>">Data Grup</a></li>
                         <li><a href="<?php echo base_url('index.php/cpeserta/individu') ?>">Peserta Individu</a></li>
                         <li><a href="<?php echo base_url('index.php/cpeserta') ?>">Peserta Grup</a></li>
                         <li><a href="<?php echo base_url('index.php/cklaim/daftar_mutasi') ?>">Klaim</a></li> 					  
@@ -36,14 +38,7 @@
                   <li><a><i class="fa fa-desktop"></i> Keuangan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url('index.php/cakuntansi/') ?>">Daftar Transaksi</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="<?php echo base_url('index.php/cakuntansi/search_iuran_sementara') ?>">Iuran Sementara</a></li>                      
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Investasi <span class="fa fa-chevron-down"></span></a>

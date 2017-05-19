@@ -80,19 +80,22 @@ class PDF extends FPDF{
             $this->Ln();
             $this->Ln();
 			$this->Cell(50,6,'Diketahui Oleh',0,0,'C');			
-			$this->Cell(78,6,'',0,0,'R');
+			//$this->Cell(78,6,'Diverifikasi Oleh',0,0,'C');
+			$this->Cell(78,6,'',0,0,'C');
 			$this->Cell(50,6,'',0,0,'C');				
 			$this->Ln();
 			$this->Cell(50,6,'Kabag. Keuangan & Investasi',0,0,'C');			
-			$this->Cell(78,6,'',0,0,'R');
+			//$this->Cell(78,6,'Kabag. Akuntansi & Administrasi',0,0,'C');
+			$this->Cell(78,6,'',0,0,'C');
 			$this->Cell(50,6,'Kasir',0,0,'C');			
 			$this->Ln();
 			$this->Ln();
 			$this->Ln();
 			$this->Ln();
 			$this->Cell(50,6,'(Abdul Bashit)',0,0,'C');			
-			$this->Cell(78,6,'',0,0,'R');
-			$this->Cell(50,6,'(Rizki Mutiara Devi)',0,0,'C');
+			//$this->Cell(78,6,'(Yunita Hasanah)',0,0,'C');
+			$this->Cell(78,6,'',0,0,'C');
+			$this->Cell(50,6,'(Agnes Ayuningtyas Pungkasari)',0,0,'C');
     }
     
     // Table

@@ -16,12 +16,31 @@ class Cpeserta extends CI_Controller {
     public function individu()
     {         
         $this->load->model('mpeserta');
-        $data['hasil'] = $this->mpeserta->daftar_peserta_individu();
         
+        $tahun = $this->input->post('tahun');
+        
+        if(isset($tahun)){
+            $tahun = $this->input->post('tahun');
+        }else{
+            $tahun = date("Y");
+        }
+        
+        $data['hasil'] = $this->mpeserta->daftar_peserta_individu($tahun);        
+            
         $this->load->view('index_top');
         $this->load->view('index_left');
         //$this->load->view('grup/daftar_grup');
         $this->load->view('operasional/peserta/daftar_peserta_individu',$data);
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');
+    }
+    
+    public function data_individu()
+    {                 
+        $this->load->view('index_top');
+        $this->load->view('index_left');
+        //$this->load->view('grup/daftar_grup');
+        $this->load->view('operasional/peserta/data_peserta');
         //$this->load->view('_hidden_right');
         $this->load->view('index_footer');
     }
@@ -45,11 +64,39 @@ class Cpeserta extends CI_Controller {
     {                
         $this->load->model('mpeserta');
         $data['hasil'] = $this->mpeserta->detail_peserta($nomorpeserta);
-
+        if(!isset($nomorpeserta)){
+            $nomorpeserta="";
+        }
+        $data['NOMORPESERTA']=$nomorpeserta;
         $this->load->view('index_top');
         $this->load->view('index_left');		
         //$this->load->view('operasional/peserta/detail_peserta',$data);
         $this->load->view('operasional/peserta/detail_peserta',$data);
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');                
+    }
+    
+    public function update_data_peserta()
+	{                           
+            $this->load->model('mpeserta');
+            
+            $this->mpeserta->update_data_peserta();
+            $NOMOR_PESERTA = $this->input->post('NOMOR_PESERTA');                       
+            redirect(base_url('index.php/cpeserta/detail_peserta/'.$NOMOR_PESERTA), 'refresh');  
+	} 
+    
+    public function get_detail_peserta($nomorpeserta = NULL)
+    {                
+        $this->load->model('mpeserta');
+        $data['hasil'] = $this->mpeserta->get_detail_peserta($nomorpeserta);
+        if(!isset($nomorpeserta)){
+            $nomorpeserta="";
+        }
+        $data['NOMORPESERTA']=$nomorpeserta;
+        $this->load->view('index_top');
+        $this->load->view('index_left');		
+        //$this->load->view('operasional/peserta/detail_peserta',$data);
+        $this->load->view('operasional/peserta/data_peserta',$data);
         //$this->load->view('_hidden_right');
         $this->load->view('index_footer');                
     }
@@ -174,7 +221,7 @@ class Cpeserta extends CI_Controller {
         $this->load->view('index_footer');                
     }
 	
-	public function entry_pendaftaran_peserta_individu()
+    public function entry_pendaftaran_peserta_individu()
     {                
         //$this->load->model('mpeserta');
         //$data['hasil'] = $this->mpeserta->detail_peserta($nomorpeserta);
@@ -183,6 +230,32 @@ class Cpeserta extends CI_Controller {
         $this->load->view('index_left');		
         //$this->load->view('operasional/peserta/detail_peserta',$data);
         $this->load->view('operasional/peserta/entry_pendaftaran_peserta_individu'/*,$data*/);
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');                
+    }
+    
+    public function historis_investasi_peserta($nomorpeserta)
+    {                
+        $this->load->model('mpeserta');
+        $data['hasil'] = $this->mpeserta->historis_investasi_peserta($nomorpeserta);
+        $data['NOMORPESERTA']=$nomorpeserta;
+        $this->load->view('index_top');
+        $this->load->view('index_left');		
+        //$this->load->view('operasional/peserta/detail_peserta',$data);
+        $this->load->view('operasional/peserta/historis_perubahan_investasi',$data);
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');                
+    }
+    
+    public function historis_perubahan_grup($nomorpeserta)
+    {                
+        $this->load->model('mpeserta');
+        $data['hasil'] = $this->mpeserta->historis_perubahan_grup($nomorpeserta);
+        $data['NOMORPESERTA']=$nomorpeserta;
+        $this->load->view('index_top');
+        $this->load->view('index_left');		
+        //$this->load->view('operasional/peserta/detail_peserta',$data);
+        $this->load->view('operasional/peserta/historis_perubahan_grup',$data);
         //$this->load->view('_hidden_right');
         $this->load->view('index_footer');                
     }

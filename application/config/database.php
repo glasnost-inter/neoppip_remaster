@@ -66,6 +66,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP) (HOST = 192.168.2.15)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = DPLK)))',
 	//'hostname' => '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP) (HOST = 127.0.0.1)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))',
+        //'hostname' => '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP) (HOST = localhost)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = ORCL)))',
         //'hostname' => '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP) (HOST = 192.168.2.222)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = PLINDO)))',
 	'username' => 'ADMIN',
 	'password' => 'admin',

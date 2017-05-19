@@ -242,6 +242,55 @@ class makuntansi extends CI_Model {
             }
         //}
     }
+        function detail_memorial($AS_ID_REKAP){
+        //$nomorgrup = $this->input->post('nomorgrup');
+        //echo 'ini nomorpeserta'.$nomorpeserta;die;
+        //if(isset($nomorpeserta)){
+            $q = "select PROSES_BISNIS,IURAN,
+                            case when NAMA_MUTASI = 'CLOSING BULANAN' THEN
+                                 'Fee Closing Bulanan '||to_char(tgl_transaksi,'mm/yyyy')
+                            ELSE
+                                 'Fee Closing Tahunan '||to_char(tgl_transaksi,'yyyy')
+                            END keterangan,
+                            (SELECT NAMA FROM AKUN WHERE KODE_AKUN = (select akun from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI)) NAMA_AKUN,
+                            (select akun from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI) AKUN,
+                            (select POSISI from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI) POSISI 
+                  from (
+                  select NAMA_MUTASI,'BANK' proses_bisnis,tgl_transaksi,
+                            NVL(MUTASI_IURAN_IND,0)+NVL(MUTASI_IURAN_PERS,0)+NVL(MUTASI_HASIL,0) iuran
+                  from REKAP_VIEW_TRANS_PEMBUKUAN a,MUTASI_ID_KEUANGAN B
+                  WHERE A.ID_VIEW_REKAP = $AS_ID_REKAP
+                  AND A.ID_VIEW_REKAP = B.ID_REKAP
+                  ) a
+                  where iuran <> 0 
+                  union all
+                    select PROSES_BISNIS,IURAN,
+                            case when NAMA_MUTASI = 'CLOSING BULANAN' THEN
+                                 'Fee Closing Bulanan '||to_char(tgl_transaksi,'mm/yyyy')
+                            ELSE
+                                 'Fee Closing Tahunan '||to_char(tgl_transaksi,'yyyy')
+                            END keterangan,
+                            (SELECT NAMA FROM AKUN WHERE KODE_AKUN = (select akun from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI)) NAMA_AKUN,
+                            (select akun from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI) AKUN,
+                            (select POSISI from AKUN_MAPPING where proses_bisnis = a.proses_bisnis and PENGGUNAAN = 'MEMORIAL '||A.NAMA_MUTASI) POSISI 
+                  from (
+                  select NAMA_MUTASI,kode_jurnal proses_bisnis,tgl_transaksi,
+                            NVL(MUTASI_IURAN_IND,0)+NVL(MUTASI_IURAN_PERS,0)+NVL(MUTASI_HASIL,0) iuran
+                  from REKAP_VIEW_TRANS_PEMBUKUAN a,MUTASI_ID_KEUANGAN B
+                  WHERE A.ID_VIEW_REKAP = $AS_ID_REKAP
+                  AND A.ID_VIEW_REKAP = B.ID_REKAP
+                  ) a
+                  where iuran <> 0 ";
+            //echo 'ini q'.$q;die;
+            $baca = $this->db->query($q);
+            if($baca->num_rows() > 0){
+                foreach ($baca->result() as $data){
+                    $hasil[] = $data;
+                }
+                return $hasil;
+            }
+        //}
+    }
     
 }
 ?>

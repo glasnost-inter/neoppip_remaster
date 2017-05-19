@@ -77,13 +77,16 @@
                           <td><?php echo number_format($data->MUTASI_IURAN_PERS,2,",",".");?></td>
                           <td><?php echo number_format($data->MUTASI_HASIL,2,",",".");?></td>
                           <td><?php echo number_format($data->MUTASI_IURAN_IND+$data->MUTASI_IURAN_PERS+$data->MUTASI_HASIL,2,",",".");?></td!-->
-                          <td><a class="btn" href="#" onClick="popitup('<?php echo base_url('index.php/cpopakuntansi/lampiran_slip/'.$data->ID_REKAP.'/'.$data->NAMA_MUTASI) ?>',850,575)">
-								<i class="fa fa-edit"></i>								
-							  </a>
-							  <a class="btn" href="#" onClick="popitup('<?php echo base_url('index.php/cpopakuntansi/slip_penerimaan/'.$data->ID_REKAP.'/'.$data->NAMA_MUTASI) ?>',850,575)">
-								<i class="fa fa-edit"></i>							
-							  </a>
-						  </td>
+                          <td><a class="btn btn-primary btn-sm" href="#" onClick="popitup('<?php echo base_url('index.php/cpopakuntansi/lampiran_slip/'.$data->ID_REKAP.'/'.$data->NAMA_MUTASI) ?>',850,575)">
+                                  Lampiran SLIP&nbsp;&nbsp;<i class="fa fa-edit"></i>								
+                              </a>
+                              <a class="btn btn-primary btn-sm" href="#" onClick="popitup('<?php echo base_url('index.php/cpopakuntansi/slip_penerimaan/'.$data->ID_REKAP.'/'.$data->NAMA_MUTASI) ?>',850,575)">
+                                  SLIP&nbsp;&nbsp;<i class="fa fa-edit"></i>							
+                              </a>
+                              <a class="btn btn-primary btn-sm" href="#" onClick="popitup('<?php echo base_url('index.php/cpopakuntansi/memorial_penerimaan/'.$data->ID_REKAP.'/'.$data->NAMA_MUTASI) ?>',850,575)">
+                                  Bukti Memorial&nbsp;&nbsp;<i class="fa fa-edit"></i>							
+                              </a>
+                          </td>
                       </tr>
 					  <?php
 					  }

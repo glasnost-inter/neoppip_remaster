@@ -33,7 +33,7 @@ class cpopakuntansi extends CI_Controller {
 	{
 		$this->load->model('makuntansi');
 		//echo 'AS_NAMA_MUTASI '.$AS_NAMA_MUTASI;die;
-		if($AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20UNIDENTIFIED'){
+		if($AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20UNIDENTIFIED'||$AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20RETUR'){
 			$data['hasil'] = $this->makuntansi->lampiran_slip_iuran_sementara_unidentified($AS_ID_REKAP);	
 		}
 		elseif($AS_NAMA_MUTASI=='CLOSING%20TAHUNAN'||$AS_NAMA_MUTASI=='CLOSING%20BULANAN'){
@@ -51,7 +51,7 @@ class cpopakuntansi extends CI_Controller {
 	{
 		$this->load->model('makuntansi');
 		//echo 'AS_NAMA_MUTASI '.$AS_NAMA_MUTASI;die;
-		if($AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20UNIDENTIFIED'){
+		if($AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20UNIDENTIFIED'||$AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20RETUR'){
 			$data['hasil'] = $this->makuntansi->lampiran_slip_iuran_sementara_unidentified($AS_ID_REKAP);	
 			$data['hasil2'] = $this->makuntansi->rekap_slip_iuran_sementara_unidentified($AS_ID_REKAP);	
 		}
@@ -66,6 +66,31 @@ class cpopakuntansi extends CI_Controller {
 			
 		$this->load->library('fpdf'); 	
 		$this->load->view('keuangan/transaksi_jurnal/slip_pdf',$data);		
+	}
+        
+        public function memorial_penerimaan($AS_ID_REKAP,$AS_NAMA_MUTASI)
+	{
+		$this->load->model('makuntansi');
+		//echo 'AS_NAMA_MUTASI '.$AS_NAMA_MUTASI;die;
+                /*
+		if($AS_NAMA_MUTASI=='IURAN%20SEMENTARA%20UNIDENTIFIED'){
+			$data['hasil'] = $this->makuntansi->lampiran_slip_iuran_sementara_unidentified($AS_ID_REKAP);	
+			$data['hasil2'] = $this->makuntansi->rekap_slip_iuran_sementara_unidentified($AS_ID_REKAP);	
+		}
+		elseif($AS_NAMA_MUTASI=='CLOSING%20TAHUNAN'||$AS_NAMA_MUTASI=='CLOSING%20BULANAN'){
+			$data['hasil'] = $this->makuntansi->lampiran_slip_iuran_closing($AS_ID_REKAP);	
+			$data['hasil2'] = $this->makuntansi->rekap_slip_iuran_closing($AS_ID_REKAP);	
+		}
+		else{
+			$data['hasil'] = $this->makuntansi->lampiran_slip_daftar_iuran_lanjutan($AS_ID_REKAP);	
+			$data['hasil2'] = $this->makuntansi->rekap_slip_daftar_iuran_lanjutan($AS_ID_REKAP);	
+		}
+                */
+                $data['hasil'] = $this->makuntansi->detail_memorial($AS_ID_REKAP);	
+		$data['hasil2'] = $this->makuntansi->rekap_slip_iuran_closing($AS_ID_REKAP);	
+			
+		$this->load->library('fpdf'); 	
+		$this->load->view('keuangan/transaksi_jurnal/memorial_pdf',$data);		
 	}
 		
 }

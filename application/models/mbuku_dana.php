@@ -1,6 +1,6 @@
 <?php
 class mbuku_dana extends CI_Model {
-    function buku_dana($nomorpeserta){
+    function buku_danax($nomorpeserta){
         //$nomorgrup = $this->input->post('nomorgrup');
         //echo 'ini '.$nomorgrup;die;
         if(isset($nomorpeserta)){
@@ -16,6 +16,26 @@ class mbuku_dana extends CI_Model {
         }
     }
     
+    function buku_dana($nomorpeserta){
+                
+        $q = "select case when tgl_transaksi - (select tgl_masuk from peserta where nomor_peserta = a.nomor_peserta) <= 365 then
+                        'NB'
+                     ELSE
+                        'OB'
+                     END NBOB,   
+                     a.*
+             from buku_dana a
+             where nomor_peserta = '$nomorpeserta'
+             order by TGL_TRANSAKSI,NOMOR_BARIS";
+        //echo 'ini q'.$q;die;
+        $baca = $this->db->query($q);
+        if($baca->num_rows() > 0){
+            foreach ($baca->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }  
     
     function buku_dana_ind_ppukp($nomorpeserta){
         //$nomorgrup = $this->input->post('nomorgrup');

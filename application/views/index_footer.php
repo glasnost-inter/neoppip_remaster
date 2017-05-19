@@ -29,13 +29,40 @@
     <!-- Skycons -->
     <script src="<?php echo base_url('/vendors/skycons/skycons.js'); ?>"></script>
 	
-	<script language="javascript" type="text/javascript">	
-	function popitup(url,awidth = 850,aheight = 1050) {            
-            newwindow=window.open(url,'name','height='+aheight+',width='+awidth+', menubar=no, scrollbars=yes, resizable=yes, copyhistory=no,');
-            if (window.focus) {newwindow.focus()}
-            return false;
-	}        
-    </script>   
+    <script language="javascript" type="text/javascript">	
+    function popitup(url,awidth = 850,aheight = 1050) {            
+        newwindow=window.open(url,'name','height='+aheight+',width='+awidth+', menubar=no, scrollbars=yes, resizable=yes, copyhistory=no,');
+        if (window.focus) {newwindow.focus()}
+        return false;
+    }                
+    </script>           
+    
+    <script>
+    $(document).ready(function(){
+        $('input[name="IURAN_PERS"]').change(function(){
+            //alert("The text has been changed.");
+            var hitung = $('input[name="IURAN"]').val() - $('input[name="IURAN_PERS"]').val();
+            //alert("The text has been changed. "+hitung);
+            $('input[name="IURAN"]').val(hitung);
+        });
+    });
+    </script>
+    
+    <script type="text/javascript">
+    $(function() {
+        $('input[name="TGL_TRANSAKSI"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        }, 
+        function(start, end, label) {
+            var years = moment().diff(start, 'years');
+            //alert("You are " + years + " years old.");
+        });
+    });
+    </script>
 	
     <!-- Flot -->
     <script src="<?php echo base_url('/vendors/Flot/jquery.flot.js'); ?>"></script>

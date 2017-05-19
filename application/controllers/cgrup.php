@@ -42,4 +42,30 @@ class Cgrup extends CI_Controller {
         //$this->load->view('_hidden_right');
         $this->load->view('index_footer');                
     }
+    
+    public function data_grup()
+    {                 
+        $this->load->view('index_top');
+        $this->load->view('index_left');
+        //$this->load->view('grup/daftar_grup');
+        $this->load->view('operasional/grup/data_grup');
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');
+    }
+    
+    public function get_detail_grup($nomorgrup = NULL)
+    {                
+        $this->load->model('mgrup');
+        $data['hasil'] = $this->mgrup->get_detail_grup($nomorgrup);
+        if(!isset($nomorgrup)){
+            $nomorgrup="";
+        }
+        $data['NOMORGRUP']=$nomorgrup;
+        $this->load->view('index_top');
+        $this->load->view('index_left');		
+        //$this->load->view('operasional/grup/detail_grup',$data);
+        $this->load->view('operasional/grup/data_grup',$data);
+        //$this->load->view('_hidden_right');
+        $this->load->view('index_footer');                
+    }
 }

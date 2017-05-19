@@ -3,7 +3,17 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Daftar Transaksi</h3>
+				<form class="form-horizontal" method="post" action="<?php echo base_url('index.php/cpeserta/individu') ?>">                                            
+					<div class="col-md-15 col-sm-15 col-xs-12 form-group pull-right top_search">
+					  <div class="input-group">
+						<input type="text" class="form-control" placeholder="Masukan tahun masuk [yyyy]" name="tahun" id="idnomorgrup">
+						<span class="input-group-btn">
+						  <!--button class="btn btn-default" type="button" onClick="popitup('<?php echo base_url('index.php/cpopgrup') ?>',800,600)">...</button-->
+						  <button class="btn btn-default" type="submit">cari</button>
+						</span>
+					  </div>
+					</div>
+				</form>	
               </div>
 
               <div class="title_right">
@@ -92,7 +102,8 @@
 											 <i class="glyphicon glyphicon-barcode"></i>
 										 </a>
 										<a data-placement="bottom" data-original-title="Fullscreen" data-toggle="tooltip"
-											class="btn btn-default btn-sm" id="toggleFullScreen">
+											class="btn btn-default btn-sm" id="toggleFullScreen"
+                                                                                        href="<?php echo base_url('index.php/cdokumen/daftar_dokumen_peserta/'.$data->NOMOR_PESERTA) ?>">
 											 <i class="fa fa-folder-open-o"></i>
 										 </a>
 									</td>
